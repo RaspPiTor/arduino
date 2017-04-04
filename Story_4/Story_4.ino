@@ -19,10 +19,8 @@ void loop()
 {
   digitalWrite(m1enable, HIGH);
   digitalWrite(m1forward, HIGH);
-  digitalWrite(m1backward, LOW);
   digitalWrite(m2enable, HIGH);
   digitalWrite(m2forward, HIGH);
-  digitalWrite(m2backward, LOW);
   delay(1000);
   digitalWrite(m1forward, LOW);
   digitalWrite(m2forward, LOW);
@@ -34,4 +32,6 @@ void loop()
   digitalWrite(m2backward, HIGH);
   digitalWrite(m2enable, HIGH);
   delay(1000);
+  digitalWrite(m1backward, LOW);
+  digitalWrite(m2backward, LOW);
 }
