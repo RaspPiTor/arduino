@@ -36,32 +36,32 @@ void m2change() {
 
 void balance() {
   if (m1counter > m2counter) {
-    digitalWrite(m2forward, HIGH);
-    digitalWrite(m1forward, LOW);
+    analogWrite(m2forward, 180);
+    analogWrite(m1forward, 0);
   }
   else if (m2counter > m1counter) {
-    digitalWrite(m2forward, LOW);
-    digitalWrite(m1forward, HIGH);
+    analogWrite(m2forward, 0);
+    analogWrite(m1forward, 180);
   }
   else {
-    digitalWrite(m2forward, HIGH);
-    digitalWrite(m1forward, HIGH);
+    analogWrite(m2forward, 180);
+    analogWrite(m1forward, 180);
   }
 }
 
 void loop()
 {
-  digitalWrite(m1forward, HIGH);
-  digitalWrite(m2forward, HIGH);
+  analogWrite(m1forward, 180);
+  analogWrite(m2forward, 180);
   digitalWrite(m1enable, HIGH);
   digitalWrite(m2enable, HIGH);
-  //delay(10000);
-  while (1) {
-    delay(50);
-    Serial.print(m1counter);
-    Serial.print(":");
-    Serial.println(m2counter);
-  }
+  delay(10000);
+  //while (1) {
+    //delay(50);
+    //Serial.print(m1counter);
+    //Serial.print(":");
+    //Serial.println(m2counter);
+ // }
   m1counter = m2counter;
   hardstop();
   while (1) {
@@ -71,9 +71,7 @@ void loop()
 void hardstop() {
   digitalWrite(m1enable, HIGH);
   digitalWrite(m2enable, HIGH);
-  digitalWrite(m1backward, LOW);
-  digitalWrite(m2backward, LOW);
-  digitalWrite(m1forward, LOW);
-  digitalWrite(m2forward, LOW);
+  analogWrite(m1forward, 0);
+  analogWrite(m2forward, 0);
 }
 
