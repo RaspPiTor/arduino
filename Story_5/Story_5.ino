@@ -14,8 +14,8 @@ void setup()
   Serial.begin(115200);
   pinMode(m1pin, INPUT);
   pinMode(m2pin, INPUT);
-  attachInterrupt(0, m1change, CHANGE);
-  attachInterrupt(1, m2change, CHANGE);
+  attachInterrupt(0, m1change, RISING);
+  attachInterrupt(1, m2change, RISING);
   pinMode(m1enable, OUTPUT);
   pinMode(m1forward, OUTPUT);
   pinMode(m1backward, OUTPUT);
@@ -36,23 +36,23 @@ void m2change() {
 
 void balance() {
   if (m1counter > m2counter) {
-    analogWrite(m2forward, 180);
+    analogWrite(m2forward, 170);
     analogWrite(m1forward, 0);
   }
   else if (m2counter > m1counter) {
     analogWrite(m2forward, 0);
-    analogWrite(m1forward, 180);
+    analogWrite(m1forward, 170);
   }
   else {
-    analogWrite(m2forward, 180);
-    analogWrite(m1forward, 180);
+    analogWrite(m2forward, 170);
+    analogWrite(m1forward, 170);
   }
 }
 
 void loop()
 {
-  analogWrite(m1forward, 180);
-  analogWrite(m2forward, 180);
+  analogWrite(m1forward, 170);
+  analogWrite(m2forward, 170);
   digitalWrite(m1enable, HIGH);
   digitalWrite(m2enable, HIGH);
   delay(10000);
@@ -65,8 +65,9 @@ void loop()
   m1counter = m2counter;
   hardstop();
   while (1) {
-    delay(1000);
-  }
+    delay(10);
+    hardstop();
+  }+
 }
 void hardstop() {
   digitalWrite(m1enable, HIGH);
