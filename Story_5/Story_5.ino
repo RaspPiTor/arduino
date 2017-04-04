@@ -8,8 +8,8 @@ int const m1pin = 2;
 int const m2pin = 3;
 volatile int m1counter = 0;
 volatile int m2counter = 0;
-
-const int power = 160;
+bool off = false;
+const int power = 150;
 
 void setup()
 {
@@ -37,6 +37,9 @@ void m2change() {
 }
 
 void balance() {
+  if (off) {
+    return;
+  }
   if (m1counter > m2counter) {
     analogWrite(m2forward, power);
     analogWrite(m1forward, 0);
@@ -66,6 +69,7 @@ void loop()
  // }
   m1counter = m2counter;
   hardstop();
+  off = true;
   while (1) {
     delay(10);
     hardstop();
