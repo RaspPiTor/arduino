@@ -1,16 +1,17 @@
-int m1enable = 9;
-int m1forward = 8;
-int m1backward = 7;
-int m2enable = 10;
-int m2forward = 12;
-int m2backward = 11;
-int m1pin = 2;
-int m2pin = 3;
+int const m1enable = 9;
+int const m1forward = 8;
+int const m1backward = 7;
+int const m2enable = 10;
+int const m2forward = 12;
+int const m2backward = 11;
+int const m1pin = 2;
+int const m2pin = 3;
 volatile int m1counter = 0;
 volatile int m2counter = 0;
 
 void setup()
 {
+  Serial.begin(115200);
   pinMode(m1pin, INPUT);
   pinMode(m2pin, INPUT);
   attachInterrupt(0, m1change, CHANGE);
@@ -54,9 +55,13 @@ void loop()
   digitalWrite(m2forward, HIGH);
   digitalWrite(m1enable, HIGH);
   digitalWrite(m2enable, HIGH);
-  digitalWrite(m1backward, HIGH);
-  digitalWrite(m2backward, HIGH);
-  delay(10000);
+  //delay(10000);
+  while (1) {
+    delay(50);
+    Serial.print(m1counter);
+    Serial.print(":");
+    Serial.println(m2counter);
+  }
   m1counter = m2counter;
   hardstop();
   while (1) {
