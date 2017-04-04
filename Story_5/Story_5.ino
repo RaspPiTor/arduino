@@ -57,8 +57,11 @@ void loop()
   digitalWrite(m1backward, HIGH);
   digitalWrite(m2backward, HIGH);
   delay(10000);
+  m1counter = m1counter;
   hardstop();
-  while (1) {delay(10);hardstop();}
+  while (1) {
+    delay(1000);
+  }
 }
 void hardstop() {
   digitalWrite(m1enable, HIGH);
@@ -68,3 +71,4 @@ void hardstop() {
   digitalWrite(m1forward, LOW);
   digitalWrite(m2forward, LOW);
 }
+
