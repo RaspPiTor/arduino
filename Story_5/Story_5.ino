@@ -9,6 +9,8 @@ int const m2pin = 3;
 volatile int m1counter = 0;
 volatile int m2counter = 0;
 
+const int power = 160;
+
 void setup()
 {
   Serial.begin(115200);
@@ -36,23 +38,23 @@ void m2change() {
 
 void balance() {
   if (m1counter > m2counter) {
-    analogWrite(m2forward, 170);
+    analogWrite(m2forward, power);
     analogWrite(m1forward, 0);
   }
   else if (m2counter > m1counter) {
     analogWrite(m2forward, 0);
-    analogWrite(m1forward, 170);
+    analogWrite(m1forward, power);
   }
   else {
-    analogWrite(m2forward, 170);
-    analogWrite(m1forward, 170);
+    analogWrite(m2forward, power);
+    analogWrite(m1forward, power);
   }
 }
 
 void loop()
 {
-  analogWrite(m1forward, 170);
-  analogWrite(m2forward, 170);
+  analogWrite(m1forward, power);
+  analogWrite(m2forward, power);
   digitalWrite(m1enable, HIGH);
   digitalWrite(m2enable, HIGH);
   delay(10000);
@@ -67,7 +69,7 @@ void loop()
   while (1) {
     delay(10);
     hardstop();
-  }+
+  }
 }
 void hardstop() {
   digitalWrite(m1enable, HIGH);
