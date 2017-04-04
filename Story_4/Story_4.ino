@@ -1,8 +1,8 @@
 int m1enable = 9;
-int m1forward = 7;
-int m1backward = 8;
-int m2enable = 12;
-int m2forward = 10;
+int m1forward = 8;
+int m1backward = 7;
+int m2enable = 10;
+int m2forward = 12;
 int m2backward = 11;
 
 void setup()
