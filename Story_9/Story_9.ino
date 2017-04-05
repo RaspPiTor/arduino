@@ -11,8 +11,9 @@ int const m2pin = 3;
 volatile int m1counter = 0;
 volatile int m2counter = 0;
 const int power = 171;
-const int x = 70;
-const int turn90 = 87.5;
+const int x = 67;
+const int turn90 = 86.25;
+const int forwardrightturn90 = 76.5;
 
 void setup()
 {
@@ -108,7 +109,7 @@ void forwardsfigureof8() {
     }
     hardstop();
     resetcounters();
-    while (m1counter < turn90 or m2counter < turn90) {
+    while (m1counter < forwardrightturn90 or m2counter < forwardrightturn90) {
       balanceright();
     }
     hardstop();
@@ -146,14 +147,13 @@ void backwardsfigureof8() {
     hardstop();
   }
   resetcounters();
-  while (m1counter < (2.75 * x) and m2counter < (2.75 * x)) {
+  while (m1counter < (2 * x) and m2counter < (2 * x)) {
     balancebackward();
 }
   for (int i = 0; i < 3; i++) {
     resetcounters();
-    turnright();
     while (m1counter < turn90 or m2counter < turn90) {
-      balanceleft();
+      balanceright();
     }
     hardstop();
     resetcounters();
