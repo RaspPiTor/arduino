@@ -72,7 +72,7 @@ void balanceright() {
     analogWrite(m1forward, power);
     analogWrite(m2backward, 0);
   }
-  elif (m2counter > m1counter) {
+  else if (m2counter > m1counter) {
     analogWrite(m1forward, 0);
     analogWrite(m2backward, power);
   }
@@ -141,7 +141,7 @@ void backwardsfigureof8() {
     hardstop();
     resetcounters();
     while (m1counter < turn90 or m2counter < turn90) {
-      balanceright();
+      balanceleft();
     }
     hardstop();
   }
