@@ -72,7 +72,7 @@ void balanceright() {
     analogWrite(m1forward, power);
     analogWrite(m2backward, 0);
   }
-  else if (m2counter > m1counter) {
+  elif (m2counter > m1counter) {
     analogWrite(m1forward, 0);
     analogWrite(m2backward, power);
   }
@@ -107,47 +107,27 @@ void forwardsfigureof8() {
       balanceforward();
     }
     hardstop();
-    delay(505);
-    resetcounters()
-    turnright();
+    resetcounters();
     while (m1counter < turn90 or m2counter < turn90) {
-      if (m1counter > turn90) {
-        analogWrite(m1forward, 0);
-      }
-      else if (m2counter > turn90) {
-        analogWrite(m2backward, 0);
-      }
-      delay(1);
+      balanceright();
     }
     hardstop();
-    delay(505);
   }
-  resetcounters()
-  forward();
+  resetcounters();
   while (m1counter < (2.75 * x) and m2counter < (2.75 * x)) {
     balanceforward();
-    delay(1);
 }
   for (int i = 0; i < 3; i++) {
     resetcounters();
-    turnleft();
     while (m1counter < turn90 or m2counter < turn90) {
-      if (m2counter > turn90) {
-        analogWrite(m2forward, 0);
-      }
-      else if (m1counter > turn90) {
-        analogWrite(m1backward, 0);
-      }
-      delay(1);
+      balanceleft();
     }
     hardstop();
-    delay(505);
     resetcounters();
     while (m1counter < x and m2counter < x) {
       balanceforward();
     }
     hardstop();
-    delay(500);
     
   }
 }
@@ -159,19 +139,11 @@ void backwardsfigureof8() {
       balancebackward();
     }
     hardstop();
-    delay(505);
     resetcounters();
-    turnleft();
     while (m1counter < turn90 or m2counter < turn90) {
-      if (m1counter > turn90) {
-        analogWrite(m1backward, 0);
-      }
-      else if (m2counter > turn90) {
-        analogWrite(m2forward, 0);
-      }
+      balanceright();
     }
     hardstop();
-    delay(505);
   }
   resetcounters();
   while (m1counter < (2.75 * x) and m2counter < (2.75 * x)) {
@@ -181,21 +153,14 @@ void backwardsfigureof8() {
     resetcounters();
     turnright();
     while (m1counter < turn90 or m2counter < turn90) {
-      if (m2counter > turn90) {
-        analogWrite(m2backward, 0);
-      }
-      else if (m1counter > turn90) {
-        analogWrite(m1forward, 0);
-      }
+      balanceleft();
     }
     hardstop();
-    delay(505);
     resetcounters();
     while (m1counter < x and m2counter < x) {
       balancebackward();
     }
     hardstop();
-    delay(500);
     
   }
 }
@@ -204,7 +169,6 @@ void loop()
 {
   forwardsfigureof8();
   hardstop();
-  delay(1000);
   backwardsfigureof8();
   hardstop();
   while (1) {}
@@ -218,6 +182,7 @@ void hardstop() {
   analogWrite(m2forward, 0);
   analogWrite(m1backward, 0);
   analogWrite(m2backward, 0);
+  delay(500);
 }
 
 
