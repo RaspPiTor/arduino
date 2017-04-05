@@ -11,7 +11,7 @@ int const m2pin = 3;
 volatile int m1counter = 0;
 volatile int m2counter = 0;
 const int power = 171;
-const int x = 75;
+const int x = 70;
 
 void setup()
 {
@@ -65,25 +65,21 @@ void loop()
     hardstop();
     delay(505);
     turnright();
-    delay(890);
+    delay(895);
     hardstop();
     delay(505);
   }
   m1counter = 0;
   m2counter = 0;
   forward();
-  while (m1counter < (2 * x) and m2counter < (2 * x)) {
-    delay(1);
-}
-  forward();
-  while (m1counter < (2 * x) and m2counter < (2 * x)) {
+  while (m1counter < (2.75 * x) and m2counter < (2.75 * x)) {
     balance();
     delay(1);
-  }
+}
   for (int i = 0; i < 3; i++) {
-    delay(505);
+    //delay(505);
     turnleft();
-    delay(890);
+    delay(805);
     hardstop();
     delay(505);
     m1counter = 0;
@@ -96,9 +92,27 @@ void loop()
     hardstop();
     
   }
+  turnleft();
+  delay(155);
+  hardstop();
+  forward();
+  delay(100);
   hardstop();
   while (1) {}
 }
+
+  }
+  turnleft();
+  delay(155);
+  hardstop();
+  forward();
+  delay(100);
+  hardstop();
+  while (1) {}
+}
+
+
+
 void hardstop() {
   digitalWrite(m1enable, HIGH);
   digitalWrite(m2enable, HIGH);
@@ -127,3 +141,4 @@ void turnleft() {
   analogWrite(m1backward, power);
   analogWrite(m2backward, 0);
 }
+
