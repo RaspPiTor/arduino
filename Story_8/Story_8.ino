@@ -11,7 +11,9 @@ int const m2pin = 3;
 volatile int m1counter = 0;
 volatile int m2counter = 0;
 const int power = 171;
-const int x = 70;
+const int x = 67;
+const int turn90 = 86.25;
+const int forwardrightturn90 = 76.5;
 
 void setup()
 {
@@ -38,7 +40,21 @@ void m2change() {
   m2counter++;
 }
 
-void balance() {
+void balancebackward() {
+  if (m1counter > m2counter) {
+    analogWrite(m2backward, power);
+    analogWrite(m1backward, 0);
+  }
+  else if (m2counter > m1counter) {
+    analogWrite(m2backward, 0);
+    analogWrite(m1backward, power);
+  }
+  else {
+    backward();
+  }
+}
+
+void balanceforward() {
   if (m1counter > m2counter) {
     analogWrite(m2forward, power);
     analogWrite(m1forward, 0);
@@ -52,66 +68,79 @@ void balance() {
   }
 }
 
-void loop()
-{
-  for (int i = 0; i < 3; i++) {
-    m1counter = 0;
-    m2counter = 0;
-    forward();
-    while (m1counter < x and m2counter < x) {
-      balance();
-      delay(1);
-    }
-    hardstop();
-    delay(505);
-    turnright();
-    delay(895);
-    hardstop();
-    delay(505);
+void balanceright() {
+  if (m2counter > m1counter) {
+    analogWrite(m1forward, power);
+    analogWrite(m2backward, 0);
   }
+  else if (m1counter > m2counter) {
+    analogWrite(m1forward, 0);
+    analogWrite(m2backward, power);
+  }
+  else {
+    turnright();
+  }
+}
+
+void balanceleft() {
+  if (m2counter > m1counter) {
+    analogWrite(m1backward, power);
+    analogWrite(m2forward, 0);
+  }
+  else if (m1counter > m2counter) {
+    analogWrite(m1backward, 0);
+    analogWrite(m2forward, power);
+  }
+  else {
+    turnleft();
+  }
+}
+
+void resetcounters() {
   m1counter = 0;
   m2counter = 0;
-  forward();
+}
+
+void forwardsfigureof8() {
+  for (int i = 0; i < 3; i++) {
+    resetcounters();
+    while (m1counter < x and m2counter < x) {
+      balanceforward();
+    }
+    hardstop();
+    resetcounters();
+    while (m1counter < forwardrightturn90 or m2counter < forwardrightturn90) {
+      balanceright();
+    }
+    hardstop();
+  }
+  resetcounters();
   while (m1counter < (2.75 * x) and m2counter < (2.75 * x)) {
-    balance();
-    delay(1);
+    balanceforward();
 }
   for (int i = 0; i < 3; i++) {
-    //delay(505);
-    turnleft();
-    delay(805);
+    resetcounters();
+    while (m1counter < turn90 or m2counter < turn90) {
+      balanceleft();
+    }
     hardstop();
-    delay(505);
-    m1counter = 0;
-    m2counter = 0;
-    forward();
+    resetcounters();
     while (m1counter < x and m2counter < x) {
-      balance();
-      delay(1);
+      balanceforward();
     }
     hardstop();
     
   }
-  turnleft();
-  delay(155);
-  hardstop();
-  forward();
-  delay(100);
-  hardstop();
-  while (1) {}
-}
-
-  }
-  turnleft();
-  delay(155);
-  hardstop();
-  forward();
-  delay(100);
-  hardstop();
-  while (1) {}
 }
 
 
+void loop()
+{
+  forwardsfigureof8();
+  hardstop();
+  while (true) {}
+  
+}
 
 void hardstop() {
   digitalWrite(m1enable, HIGH);
@@ -120,6 +149,7 @@ void hardstop() {
   analogWrite(m2forward, 0);
   analogWrite(m1backward, 0);
   analogWrite(m2backward, 0);
+  delay(500);
 }
 
 
@@ -140,5 +170,11 @@ void turnleft() {
   analogWrite(m2forward, power);
   analogWrite(m1backward, power);
   analogWrite(m2backward, 0);
+}
+void backward() {
+  analogWrite(m1forward, 0);
+  analogWrite(m2forward, 0);
+  analogWrite(m1backward, power);
+  analogWrite(m2backward, power);
 }
 
