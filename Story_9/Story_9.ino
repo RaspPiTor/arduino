@@ -68,11 +68,11 @@ void balanceforward() {
 }
 
 void balanceright() {
-  if (m1counter > m2counter) {
+  if (m2counter > m1counter) {
     analogWrite(m1forward, power);
     analogWrite(m2backward, 0);
   }
-  else if (m2counter > m1counter) {
+  else if (m1counter > m2counter) {
     analogWrite(m1forward, 0);
     analogWrite(m2backward, power);
   }
@@ -82,11 +82,11 @@ void balanceright() {
 }
 
 void balanceleft() {
-  if (m1counter > m2counter) {
+  if (m2counter > m1counter) {
     analogWrite(m1backward, power);
     analogWrite(m2forward, 0);
   }
-  else if (m2counter > m1counter) {
+  else if (m1counter > m2counter) {
     analogWrite(m1backward, 0);
     analogWrite(m2forward, power);
   }
@@ -169,9 +169,10 @@ void loop()
 {
   forwardsfigureof8();
   hardstop();
+  delay(1000);
   backwardsfigureof8();
   hardstop();
-  while (1) {}
+  while (true) {}
   
 }
 
