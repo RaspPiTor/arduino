@@ -31,5 +31,5 @@ void loop()
   digitalWrite(m2backward, LOW);
   digitalWrite(m1enable, LOW);
   digitalWrite(m2enable, LOW);
-  while (1) {delay(1000);}
+  while (1) {}
 }
