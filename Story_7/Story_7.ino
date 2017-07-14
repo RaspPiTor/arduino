@@ -3,7 +3,7 @@ unsigned int const leftForward = 8;
 unsigned int const leftBackward = 7;
 unsigned int const rightEnable = 10;
 unsigned int const rightForward = 12;
-unsigned int const leftBackward = 11;
+unsigned int const rightBackward = 11;
 unsigned int const leftMotorCountPin = 2;
 unsigned int const rightMotorCountPin = 3;
 volatile unsigned int leftMotorCount = 0;
@@ -22,7 +22,7 @@ void setup()
   pinMode(leftBackward, OUTPUT);
   pinMode(rightEnable, OUTPUT);
   pinMode(rightForward, OUTPUT);
-  pinMode(leftBackward, OUTPUT);
+  pinMode(rightBackward, OUTPUT);
   digitalWrite(leftEnable, HIGH);
   digitalWrite(rightEnable, HIGH);
 }
@@ -37,7 +37,7 @@ void rightMotorCountChange()
   rightMotorCount++;
 }
 
-void balance()
+void balanceForward()
 {
   if (leftMotorCount > rightMotorCount) {
     analogWrite(rightForward, power);
@@ -57,29 +57,27 @@ void loop()
   for (int i = 0; i < 4; i++) {
     leftMotorCount = 0;
     rightMotorCount = 0;
-    forward();
     while (leftMotorCount < 250 and rightMotorCount < 250) {
-      balance();
-      delay(10);
+      balanceForward();
     }
-    hardstop();
+    hardStop();
     delay(500);
-    turnright();
+    turnRight();
     delay(445);
-    hardstop();
+    hardStop();
     delay(500);
   }
-  hardstop();
+  hardStop();
   while (1) {}
 }
-void hardstop()
+void hardStop()
 {
   digitalWrite(leftEnable, HIGH);
   digitalWrite(rightEnable, HIGH);
   analogWrite(leftForward, 0);
   analogWrite(rightForward, 0);
   analogWrite(leftBackward, 0);
-  analogWrite(leftBackward, 0);
+  analogWrite(rightBackward, 0);
 }
 
 
@@ -87,14 +85,29 @@ void forward()
 {
   analogWrite(rightForward, power);
   analogWrite(leftForward, power);
-  analogWrite(leftBackward, 0);
+  analogWrite(rightBackward, 0);
   analogWrite(leftBackward, 0);
 }
-void turnright()
+void turnRight()
 {
   analogWrite(rightForward, 0);
   analogWrite(leftForward, power);
-  analogWrite(leftBackward, power);
+  analogWrite(rightBackward, power);
   analogWrite(leftBackward, 0);
 }
+void turnLeft()
+{
+  analogWrite(leftForward, 0);
+  analogWrite(rightForward, power);
+  analogWrite(leftBackward, power);
+  analogWrite(rightBackward, 0);
+}
+void backward()
+{
+  analogWrite(leftForward, 0);
+  analogWrite(rightForward, 0);
+  analogWrite(leftBackward, power);
+  analogWrite(rightBackward, power);
+}
+
 
