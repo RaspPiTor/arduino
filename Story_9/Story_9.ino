@@ -29,15 +29,18 @@ void setup()
   digitalWrite(rightEnable, HIGH);
 }
 
-void leftMotorCountChange() {
+void leftMotorCountChange()
+{
   leftMotorCount++;
 }
 
-void rightMotorCountChange() {
+void rightMotorCountChange()
+{
   rightMotorCount++;
 }
 
-void balanceBackward() {
+void balanceBackward()
+{
   if (leftMotorCount > rightMotorCount) {
     analogWrite(rightBackward, power);
     analogWrite(leftBackward, 0);
@@ -51,7 +54,8 @@ void balanceBackward() {
   }
 }
 
-void balanceForward() {
+void balanceForward()
+{
   if (leftMotorCount > rightMotorCount) {
     analogWrite(rightForward, power);
     analogWrite(leftForward, 0);
@@ -65,7 +69,8 @@ void balanceForward() {
   }
 }
 
-void balanceRight() {
+void balanceRight()
+{
   if (rightMotorCount > leftMotorCount) {
     analogWrite(leftForward, power);
     analogWrite(rightBackward, 0);
@@ -79,7 +84,8 @@ void balanceRight() {
   }
 }
 
-void balanceLeft() {
+void balanceLeft()
+{
   if (rightMotorCount > leftMotorCount) {
     analogWrite(leftBackward, power);
     analogWrite(rightForward, 0);
@@ -93,17 +99,20 @@ void balanceLeft() {
   }
 }
 
-void resetCounters() {
+void resetCounters()
+{
   leftMotorCount = 0;
   rightMotorCount = 0;
 }
 
-void totalReset() {
+void totalReset()
+{
   resetCounters();
   hardStop();
 }
 
-void forwardsFigureOf8() {
+void forwardsFigureOf8()
+{
   for (int i = 0; i < 3; i++) {
     while (leftMotorCount < x and rightMotorCount < x) {
       balanceForward();
@@ -116,7 +125,7 @@ void forwardsFigureOf8() {
   }
   while (leftMotorCount < (2.75 * x) and rightMotorCount < (2.75 * x)) {
     balanceForward();
-}
+  }
   for (int i = 0; i < 3; i++) {
     totalReset();
     while (leftMotorCount < turn90 or rightMotorCount < turn90) {
@@ -129,7 +138,8 @@ void forwardsFigureOf8() {
   }
 }
 
-void backwardsFigureOf8() {
+void backwardsFigureOf8()
+{
   for (int i = 0; i < 3; i++) {
     while (leftMotorCount < x and rightMotorCount < x) {
       balanceBackward();
@@ -142,7 +152,7 @@ void backwardsFigureOf8() {
   }
   while (leftMotorCount < (2 * x) and rightMotorCount < (2 * x)) {
     balanceBackward();
-}
+  }
   for (int i = 0; i < 3; i++) {
     totalReset();
     while (leftMotorCount < turn90 or rightMotorCount < turn90) {
@@ -162,11 +172,13 @@ void loop()
   delay(1000);
   backwardsFigureOf8();
   totalReset();
-  while (true) {}
-  
+  while (true) {
+  }
+
 }
 
-void hardStop() {
+void hardStop()
+{
   digitalWrite(leftEnable, HIGH);
   digitalWrite(rightEnable, HIGH);
   analogWrite(leftForward, 0);
@@ -177,28 +189,33 @@ void hardStop() {
 }
 
 
-void forward() {
+void forward()
+{
   analogWrite(rightForward, power);
   analogWrite(leftForward, power);
   analogWrite(rightBackward, 0);
   analogWrite(leftBackward, 0);
 }
-void turnRight() {
+void turnRight()
+{
   analogWrite(rightForward, 0);
   analogWrite(leftForward, power);
   analogWrite(rightBackward, power);
   analogWrite(leftBackward, 0);
 }
-void turnLeft() {
+void turnLeft()
+{
   analogWrite(leftForward, 0);
   analogWrite(rightForward, power);
   analogWrite(leftBackward, power);
   analogWrite(rightBackward, 0);
 }
-void backward() {
+void backward()
+{
   analogWrite(leftForward, 0);
   analogWrite(rightForward, 0);
   analogWrite(leftBackward, power);
   analogWrite(rightBackward, power);
 }
+
 
