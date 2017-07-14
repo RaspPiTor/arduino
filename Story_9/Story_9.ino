@@ -17,7 +17,6 @@ unsigned int const forwardrightturn90 = 76;
 
 void setup()
 {
-  Serial.begin(115200);
   pinMode(m1pin, INPUT);
   pinMode(m2pin, INPUT);
   attachInterrupt(0, m1change, RISING);
