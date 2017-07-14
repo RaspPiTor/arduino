@@ -9,16 +9,16 @@
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
 
-int const m1enable = 9;
-int const m1forward = 8;
-int const m1backward = 7;
-int const m2enable = 10;
-int const m2forward = 12;
-int const m2backward = 11;
-int const m1pin = 2;
-int const m2pin = 3;
-volatile int m1counter = 0;
-volatile int m2counter = 0;
+int const leftEnable = 9;
+int const leftForward = 8;
+int const leftBackward = 7;
+int const rightEnable = 10;
+int const rightForward = 12;
+int const leftBackward = 11;
+int const leftMotorCountPin = 2;
+int const rightMotorCountPin = 3;
+volatile int leftMotorCount = 0;
+volatile int rightMotorCount = 0;
 const int power = 171;
 const int x = 67;
 const int turn90 = 86.25;
@@ -27,87 +27,87 @@ const int forwardrightturn90 = 76.5;
 void setup()
 {
   Serial.begin(115200);
-  pinMode(m1pin, INPUT);
-  pinMode(m2pin, INPUT);
-  attachInterrupt(0, m1change, RISING);
-  attachInterrupt(1, m2change, RISING);
-  pinMode(m1enable, OUTPUT);
-  pinMode(m1forward, OUTPUT);
-  pinMode(m1backward, OUTPUT);
-  pinMode(m2enable, OUTPUT);
-  pinMode(m2forward, OUTPUT);
-  pinMode(m2backward, OUTPUT);
-  digitalWrite(m1enable, HIGH);
-  digitalWrite(m2enable, HIGH);
+  pinMode(leftMotorCountPin, INPUT);
+  pinMode(rightMotorCountPin, INPUT);
+  attachInterrupt(0, leftMotorCountChange, RISING);
+  attachInterrupt(1, rightMotorCountChange, RISING);
+  pinMode(leftEnable, OUTPUT);
+  pinMode(leftForward, OUTPUT);
+  pinMode(leftBackward, OUTPUT);
+  pinMode(rightEnable, OUTPUT);
+  pinMode(rightForward, OUTPUT);
+  pinMode(leftBackward, OUTPUT);
+  digitalWrite(leftEnable, HIGH);
+  digitalWrite(rightEnable, HIGH);
 }
 
-void m1change() {
-  m1counter++;
+void leftMotorCountChange() {
+  leftMotorCount++;
 }
 
-void m2change() {
-  m2counter++;
+void rightMotorCountChange() {
+  rightMotorCount++;
 }
 
-void balancebackward() {
-  if (m1counter > m2counter) {
-    analogWrite(m2backward, power);
-    analogWrite(m1backward, 0);
+void balanceBackward() {
+  if (leftMotorCount > rightMotorCount) {
+    analogWrite(leftBackward, power);
+    analogWrite(leftBackward, 0);
   }
-  else if (m2counter > m1counter) {
-    analogWrite(m2backward, 0);
-    analogWrite(m1backward, power);
+  else if (rightMotorCount > leftMotorCount) {
+    analogWrite(leftBackward, 0);
+    analogWrite(leftBackward, power);
   }
   else {
     backward();
   }
 }
 
-void balanceforward() {
-  if (m1counter > m2counter) {
-    analogWrite(m2forward, power);
-    analogWrite(m1forward, 0);
+void balanceForward() {
+  if (leftMotorCount > rightMotorCount) {
+    analogWrite(rightForward, power);
+    analogWrite(leftForward, 0);
   }
-  else if (m2counter > m1counter) {
-    analogWrite(m2forward, 0);
-    analogWrite(m1forward, power);
+  else if (rightMotorCount > leftMotorCount) {
+    analogWrite(rightForward, 0);
+    analogWrite(leftForward, power);
   }
   else {
     forward();
   }
 }
 
-void balanceright() {
-  if (m2counter > m1counter) {
-    analogWrite(m1forward, power);
-    analogWrite(m2backward, 0);
+void balanceRight() {
+  if (rightMotorCount > leftMotorCount) {
+    analogWrite(leftForward, power);
+    analogWrite(leftBackward, 0);
   }
-  else if (m1counter > m2counter) {
-    analogWrite(m1forward, 0);
-    analogWrite(m2backward, power);
+  else if (leftMotorCount > rightMotorCount) {
+    analogWrite(leftForward, 0);
+    analogWrite(leftBackward, power);
   }
   else {
     turnright();
   }
 }
 
-void balanceleft() {
-  if (m2counter > m1counter) {
-    analogWrite(m1backward, power);
-    analogWrite(m2forward, 0);
+void balanceLeft() {
+  if (rightMotorCount > leftMotorCount) {
+    analogWrite(leftBackward, power);
+    analogWrite(rightForward, 0);
   }
-  else if (m1counter > m2counter) {
-    analogWrite(m1backward, 0);
-    analogWrite(m2forward, power);
+  else if (leftMotorCount > rightMotorCount) {
+    analogWrite(leftBackward, 0);
+    analogWrite(rightForward, power);
   }
   else {
     turnleft();
   }
 }
 
-void resetcounters() {
-  m1counter = 0;
-  m2counter = 0;
+void resetCounters() {
+  leftMotorCount = 0;
+  rightMotorCount = 0;
 }
 
 void loop()
@@ -123,46 +123,46 @@ void loop()
   }
   hardstop();
   delay(500);
-  resetcounters();
-  while (m1counter < x or m2counter < x) {
-    balancebackward();
+  resetCounters();
+  while (leftMotorCount < x or rightMotorCount < x) {
+    balanceBackward();
   }
   hardstop();
   while (true) {}
-  
+
 }
 
 void hardstop() {
-  digitalWrite(m1enable, HIGH);
-  digitalWrite(m2enable, HIGH);
-  analogWrite(m1forward, 0);
-  analogWrite(m2forward, 0);
-  analogWrite(m1backward, 0);
-  analogWrite(m2backward, 0);
+  digitalWrite(leftEnable, HIGH);
+  digitalWrite(rightEnable, HIGH);
+  analogWrite(leftForward, 0);
+  analogWrite(rightForward, 0);
+  analogWrite(leftBackward, 0);
+  analogWrite(leftBackward, 0);
 }
 
 void forward() {
-  analogWrite(m2forward, power);
-  analogWrite(m1forward, power);
-  analogWrite(m2backward, 0);
-  analogWrite(m1backward, 0);
+  analogWrite(rightForward, power);
+  analogWrite(leftForward, power);
+  analogWrite(leftBackward, 0);
+  analogWrite(leftBackward, 0);
 }
 void turnright() {
-  analogWrite(m2forward, 0);
-  analogWrite(m1forward, power);
-  analogWrite(m2backward, power);
-  analogWrite(m1backward, 0);
+  analogWrite(rightForward, 0);
+  analogWrite(leftForward, power);
+  analogWrite(leftBackward, power);
+  analogWrite(leftBackward, 0);
 }
 void turnleft() {
-  analogWrite(m1forward, 0);
-  analogWrite(m2forward, power);
-  analogWrite(m1backward, power);
-  analogWrite(m2backward, 0);
+  analogWrite(leftForward, 0);
+  analogWrite(rightForward, power);
+  analogWrite(leftBackward, power);
+  analogWrite(leftBackward, 0);
 }
 void backward() {
-  analogWrite(m1forward, 0);
-  analogWrite(m2forward, 0);
-  analogWrite(m1backward, power);
-  analogWrite(m2backward, power);
+  analogWrite(leftForward, 0);
+  analogWrite(rightForward, 0);
+  analogWrite(leftBackward, power);
+  analogWrite(leftBackward, power);
 }
 
