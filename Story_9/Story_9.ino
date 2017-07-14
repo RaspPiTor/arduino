@@ -1,5 +1,3 @@
-//m1 left
-//m2 right
 unsigned int const leftEnable = 9;
 unsigned int const leftForward = 8;
 unsigned int const leftBackward = 7;
