@@ -3,7 +3,7 @@ unsigned int const leftForward = 8;
 unsigned int const leftBackward = 7;
 unsigned int const rightEnable = 10;
 unsigned int const rightForward = 12;
-unsigned int const leftBackward = 11;
+unsigned int const rightBackward = 11;
 unsigned int const leftMotorCountPin = 2;
 unsigned int const rightMotorCountPin = 3;
 volatile unsigned int leftMotorCount = 0;
@@ -22,7 +22,7 @@ void setup()
   pinMode(leftBackward, OUTPUT);
   pinMode(rightEnable, OUTPUT);
   pinMode(rightForward, OUTPUT);
-  pinMode(leftBackward, OUTPUT);
+  pinMode(rightBackward, OUTPUT);
   digitalWrite(leftEnable, HIGH);
   digitalWrite(rightEnable, HIGH);
 }
@@ -56,10 +56,17 @@ void loop()
 {
   balanceForward();
   if (leftMotorCount > 1055 or rightMotorCount > 1055) {
-    hardstop();
+    hardStop();
     while (true) {
     }
   }
+}
+void forward()
+{
+  analogWrite(rightForward, power);
+  analogWrite(leftForward, power);
+  analogWrite(rightBackward, 0);
+  analogWrite(leftBackward, 0);
 }
 void hardStop()
 {
