@@ -1,16 +1,14 @@
-//m1 left
-//m2 right
-int const leftEnable = 9;
-int const leftForward = 8;
-int const leftBackward = 7;
-int const rightEnable = 10;
-int const rightForward = 12;
-int const leftBackward = 11;
-int const leftMotorCountPin = 2;
-int const rightMotorCountPin = 3;
-volatile int leftMotorCount = 0;
-volatile int rightMotorCount = 0;
-const int power = 171;
+unsigned int const leftEnable = 9;
+unsigned int const leftForward = 8;
+unsigned int const leftBackward = 7;
+unsigned int const rightEnable = 10;
+unsigned int const rightForward = 12;
+unsigned int const leftBackward = 11;
+unsigned int const leftMotorCountPin = 2;
+unsigned int const rightMotorCountPin = 3;
+volatile unsigned int leftMotorCount = 0;
+volatile unsigned int rightMotorCount = 0;
+unsigned int const power = 171;
 
 void setup()
 {

@@ -1,9 +1,9 @@
-int leftEnable = 9;
-int leftForward = 8;
-int leftBackward = 7;
-int rightEnable = 10;
-int rightForward = 12;
-int leftBackward = 11;
+unsigned int const leftEnable = 9;
+unsigned int const leftForward = 8;
+unsigned int const leftBackward = 7;
+unsigned int const rightEnable = 10;
+unsigned int const rightForward = 12;
+unsigned int const leftBackward = 11;
 
 void setup()
 {
