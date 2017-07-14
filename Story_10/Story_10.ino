@@ -9,20 +9,20 @@
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
 
-int const leftEnable = 9;
-int const leftForward = 8;
-int const leftBackward = 7;
-int const rightEnable = 10;
-int const rightForward = 12;
-int const rightBackward = 11;
-int const leftMotorCountPin = 2;
-int const rightMotorCountPin = 3;
-volatile int leftMotorCount = 0;
-volatile int rightMotorCount = 0;
-const int power = 171;
-const int x = 67;
-const int turn90 = 86.25;
-const int forwardRightTurn90 = 76.5;
+unsigned int const leftEnable = 9;
+unsigned int const leftForward = 8;
+unsigned int const leftBackward = 7;
+unsigned int const rightEnable = 10;
+unsigned int const rightForward = 12;
+unsigned int const rightBackward = 11;
+unsigned int const leftMotorCountPin = 2;
+unsigned int const rightMotorCountPin = 3;
+volatile unsigned int leftMotorCount = 0;
+volatile unsigned int rightMotorCount = 0;
+unsigned int const power = 171;
+unsigned int const x = 67;
+unsigned int const turn90 = 86;
+unsigned int const forwardRightTurn90 = 76;
 
 void setup()
 {
