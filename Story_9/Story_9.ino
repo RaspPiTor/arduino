@@ -12,8 +12,8 @@ volatile unsigned int m1counter = 0;
 volatile unsigned int m2counter = 0;
 unsigned int const power = 171;
 unsigned int const x = 67;
-unsigned int const turn90 = 86.25;
-unsigned int const forwardrightturn90 = 76.5;
+unsigned int const turn90 = 86;
+unsigned int const forwardrightturn90 = 76;
 
 void setup()
 {
