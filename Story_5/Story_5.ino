@@ -56,8 +56,8 @@ void loop()
   digitalWrite(leftEnable, HIGH);
   digitalWrite(rightEnable, HIGH);
   for (unsigned int i = 0; i < 1000) {
-  	delay(10);
-  	balanceForward();
+    delay(10);
+    balanceForward();
   }
   hardStop();
   while (1) {}
