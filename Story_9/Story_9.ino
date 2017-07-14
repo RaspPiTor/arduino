@@ -10,7 +10,7 @@ unsigned int const m1pin = 2;
 unsigned int const m2pin = 3;
 volatile unsigned int m1counter = 0;
 volatile unsigned int m2counter = 0;
-unsigned int const constpower = 171;
+unsigned int const power = 171;
 unsigned int const x = 67;
 unsigned int const turn90 = 86.25;
 unsigned int const forwardrightturn90 = 76.5;
@@ -161,7 +161,7 @@ void backwardsfigureof8() {
 void loop()
 {
   forwardsfigureof8();
-  totalreset()
+  totalreset();
   delay(1000);
   backwardsfigureof8();
   totalreset();
