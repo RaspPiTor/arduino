@@ -1,19 +1,19 @@
 //m1 left
 //m2 right
-int const m1enable = 9;
-int const m1forward = 8;
-int const m1backward = 7;
-int const m2enable = 10;
-int const m2forward = 12;
-int const m2backward = 11;
-int const m1pin = 2;
-int const m2pin = 3;
-volatile int m1counter = 0;
-volatile int m2counter = 0;
-const int power = 171;
-const int x = 67;
-const int turn90 = 86.25;
-const int forwardrightturn90 = 76.5;
+unsigned int const m1enable = 9;
+unsigned int const m1forward = 8;
+unsigned int const m1backward = 7;
+unsigned int const m2enable = 10;
+unsigned int const m2forward = 12;
+unsigned int const m2backward = 11;
+unsigned int const m1pin = 2;
+unsigned int const m2pin = 3;
+volatile unsigned int m1counter = 0;
+volatile unsigned int m2counter = 0;
+unsigned int const constpower = 171;
+unsigned int const x = 67;
+unsigned int const turn90 = 86.25;
+unsigned int const forwardrightturn90 = 76.5;
 
 void setup()
 {
