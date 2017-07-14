@@ -3,7 +3,7 @@ unsigned int const leftForward = 3;
 unsigned int const leftBackward = 4;
 unsigned int const rightEnable = 8;
 unsigned int const rightForward = 6;
-unsigned int const leftBackward = 7;
+unsigned int const rightBackward = 7;
 
 void setup()
 {
@@ -24,11 +24,11 @@ void loop()
   delay(10000);
   digitalWrite(leftBackward, HIGH);
   digitalWrite(leftForward, LOW);
-  digitalWrite(leftBackward, HIGH);
+  digitalWrite(rightBackward, HIGH);
   digitalWrite(rightForward, LOW);
   delay(1000);
   digitalWrite(leftBackward, LOW);
-  digitalWrite(leftBackward, LOW);
+  digitalWrite(rightBackward, LOW);
   digitalWrite(leftEnable, LOW);
   digitalWrite(rightEnable, LOW);
   while (1) {}
