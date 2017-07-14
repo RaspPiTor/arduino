@@ -67,7 +67,7 @@ void balanceforward() {
   }
 }
 
-void balanceright() {
+void balanceRight() {
   if (rightMotorCount > leftMotorCount) {
     analogWrite(leftForward, power);
     analogWrite(rightBackward, 0);
@@ -81,7 +81,7 @@ void balanceright() {
   }
 }
 
-void balanceleft() {
+void balanceLeft() {
   if (rightMotorCount > leftMotorCount) {
     analogWrite(leftBackward, power);
     analogWrite(rightForward, 0);
@@ -105,14 +105,14 @@ void totalreset() {
   hardstop();
 }
 
-void forwardsfigureof8() {
+void forwardsFigureOf8() {
   for (int i = 0; i < 3; i++) {
     while (leftMotorCount < x and rightMotorCount < x) {
       balanceforward();
     }
     totalreset();
     while (leftMotorCount < forwardrightturn90 or rightMotorCount < forwardrightturn90) {
-      balanceright();
+      balanceRight();
     }
     totalreset();
   }
@@ -122,7 +122,7 @@ void forwardsfigureof8() {
   for (int i = 0; i < 3; i++) {
     totalreset();
     while (leftMotorCount < turn90 or rightMotorCount < turn90) {
-      balanceleft();
+      balanceLeft();
     }
     totalreset();
     while (leftMotorCount < x and rightMotorCount < x) {
@@ -131,14 +131,14 @@ void forwardsfigureof8() {
   }
 }
 
-void backwardsfigureof8() {
+void backwardsFigureOf8() {
   for (int i = 0; i < 3; i++) {
     while (leftMotorCount < x and rightMotorCount < x) {
       balancebackward();
     }
     totalreset();
     while (leftMotorCount < turn90 or rightMotorCount < turn90) {
-      balanceleft();
+      balanceLeft();
     }
     totalreset();
   }
@@ -148,7 +148,7 @@ void backwardsfigureof8() {
   for (int i = 0; i < 3; i++) {
     totalreset();
     while (leftMotorCount < turn90 or rightMotorCount < turn90) {
-      balanceright();
+      balanceRight();
     }
     totalreset();
     while (leftMotorCount < x and rightMotorCount < x) {
@@ -159,10 +159,10 @@ void backwardsfigureof8() {
 
 void loop()
 {
-  forwardsfigureof8();
+  forwardsFigureOf8();
   totalreset();
   delay(1000);
-  backwardsfigureof8();
+  backwardsFigureOf8();
   totalreset();
   while (true) {}
   
