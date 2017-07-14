@@ -101,77 +101,70 @@ void resetcounters() {
   m2counter = 0;
 }
 
+void totalreset() {
+  resetcounters();
+  hardstop();
+}
+
 void forwardsfigureof8() {
   for (int i = 0; i < 3; i++) {
-    resetcounters();
     while (m1counter < x and m2counter < x) {
       balanceforward();
     }
-    hardstop();
-    resetcounters();
+    totalreset();
     while (m1counter < forwardrightturn90 or m2counter < forwardrightturn90) {
       balanceright();
     }
-    hardstop();
+    totalreset();
   }
-  resetcounters();
   while (m1counter < (2.75 * x) and m2counter < (2.75 * x)) {
     balanceforward();
 }
   for (int i = 0; i < 3; i++) {
-    resetcounters();
+    totalreset();
     while (m1counter < turn90 or m2counter < turn90) {
       balanceleft();
     }
-    hardstop();
-    resetcounters();
+    totalreset();
     while (m1counter < x and m2counter < x) {
       balanceforward();
     }
-    hardstop();
-    
   }
 }
 
 void backwardsfigureof8() {
   for (int i = 0; i < 3; i++) {
-    resetcounters();
     while (m1counter < x and m2counter < x) {
       balancebackward();
     }
-    hardstop();
-    resetcounters();
+    totalreset();
     while (m1counter < turn90 or m2counter < turn90) {
       balanceleft();
     }
-    hardstop();
+    totalreset();
   }
-  resetcounters();
   while (m1counter < (2 * x) and m2counter < (2 * x)) {
     balancebackward();
 }
   for (int i = 0; i < 3; i++) {
-    resetcounters();
+    totalreset();
     while (m1counter < turn90 or m2counter < turn90) {
       balanceright();
     }
-    hardstop();
-    resetcounters();
+    totalreset();
     while (m1counter < x and m2counter < x) {
       balancebackward();
     }
-    hardstop();
-    
   }
 }
 
 void loop()
 {
   forwardsfigureof8();
-  hardstop();
+  totalreset()
   delay(1000);
   backwardsfigureof8();
-  hardstop();
+  totalreset();
   while (true) {}
   
 }
